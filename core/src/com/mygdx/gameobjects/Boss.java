@@ -1,7 +1,5 @@
 package com.mygdx.gameobjects;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
@@ -15,7 +13,6 @@ public class Boss extends GameObject{
 	private GameWorld world;
 
 	private Circle boundingCircle;
-	private Random r;
 	private int reload = 0;
 	private int reloadTime = 30;
 	private int bulletAmmount = 7;
@@ -32,7 +29,6 @@ public class Boss extends GameObject{
 		width = 64;
 		height = 64;
 		boundingCircle = new Circle();
-		r = new Random();
 
 	}
 

@@ -7,6 +7,8 @@ public enum ID {
 	BasicStone(),
 	SmallStone(),
 	BasicEnemy(),
+	ShootingEnemy(),
+	ShootingEnemyBullet(),
 	Heal(),
 	Boss(),
 	BossBullet()

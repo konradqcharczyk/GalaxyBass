@@ -23,10 +23,10 @@ public class GameRenderer {
 	private SpriteBatch batcher;
 	private float greenValue;
 	public static boolean drawHB = false;
-	public static boolean mute = false;
+	public static boolean mute = true;
 
 	
-	public GameRenderer(GameWorld world, int gameHeight)
+	public GameRenderer(GameWorld world)
 	{
 		this.world = world;
 		
@@ -157,9 +157,12 @@ public class GameRenderer {
 	}
 	public static void playMusic()
 	{
+		if(!mute)
+		{
 	        AssetLoader.music.play();
 	        AssetLoader.music.setVolume(0.6f);
 	        AssetLoader.music.setLooping(true);
+		}
 	}
 	public static void stopMusic()
 	{

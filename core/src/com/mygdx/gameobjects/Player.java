@@ -1,6 +1,5 @@
 package com.mygdx.gameobjects;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.mygdx.gameworld.GameRenderer;

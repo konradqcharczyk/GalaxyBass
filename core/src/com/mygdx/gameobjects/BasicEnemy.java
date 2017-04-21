@@ -26,7 +26,7 @@ public class BasicEnemy extends GameObject{
 		height = 16;
 		boundingCircle = new Circle();
 		r = new Random();
-		speed = r.nextInt(20) + 100;
+		speed = r.nextInt(20) + 180;
 	}
 
 	@Override
