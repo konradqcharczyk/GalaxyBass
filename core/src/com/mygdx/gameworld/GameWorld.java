@@ -12,6 +12,7 @@ import com.mygdx.gameobjects.GameObject;
 import com.mygdx.gameobjects.Heal;
 import com.mygdx.gameobjects.ID;
 import com.mygdx.gameobjects.Player;
+import com.mygdx.gameobjects.ShootingEnemy;
 
 public class GameWorld {
 
@@ -22,6 +23,7 @@ public class GameWorld {
 	private int score = 0;
 	private int lvl = 0;
 	private int lvlReload = 0;
+	private int lvlTime = 400;
 	private int scoreSpeed = 15; // co ile klatek +1 score
 	private Random r;
 	private boolean isBoss = false;
@@ -64,44 +66,43 @@ public class GameWorld {
     	{
 	    	if(lvlReload <= 0)
 	    	{
-	    		lvlReload = 300;
+	    		lvlReload = lvlTime;
 	    		lvl++;
-	
-	    		if(lvl == 1)
-	    		{
-	    			for(int i = 0; i < 10; i++)
-	    				addObject(new BasicStone(r.nextInt(200), r.nextInt(200) + 400, ID.BasicStone,this));
-	    		}
-	    		else if(lvl == 2)
-	    		{
-	    			for(int i = 0; i < 15; i++)
-	    				addObject(new BasicStone(r.nextInt(200), r.nextInt(200) + 400, ID.BasicStone,this));
-	    		}
-	    		else if(lvl == 3)
-	    		{
-	    			for(int i = 0; i < 15; i++)
-	    				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(200) + 400, ID.BasicEnemy,this));
-	    		}
-	    		else if(lvl == 4)
-	    		{
-	    			for(int i = 0; i < 10; i++)
-	    				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(150) + 400, ID.BasicEnemy,this));
-	    			for(int i = 0; i < 10; i++)
-	    				addObject(new BasicStone(r.nextInt(200), r.nextInt(150) + 400, ID.BasicStone,this));
-	    			
-	        		addObject(new Heal(r.nextInt(200), r.nextInt(150) + 310, ID.Heal,this));
-	    		}
-	    		else if(lvl == 5)
-	    		{
-	    			addObject(new Boss(90, 350, ID.Boss,this));
-	    		}
-
-    	}
-    	else 
-    		if(isAlive) lvlReload--;
+	    	
+	    	}
+    	else if(isAlive) lvlReload--;
+	    	
+	    if(!isBoss)
+	    {
+    		if(lvl == 1)
+    		{
+    			if(r.nextInt(40) == 1) addObject(new BasicStone(r.nextInt(200), 320, ID.BasicStone,this));		
+    		}
+    		else if(lvl == 2)
+    		{
+    			if(r.nextInt(50) == 1) addObject(new BasicStone(r.nextInt(200), 320, ID.BasicStone,this));
+    			if(r.nextInt(40) == 1) addObject(new BasicEnemy(r.nextInt(200), 320, ID.BasicEnemy,this));
+    		}
+    		else if(lvl == 3)
+    		{
+    			if(r.nextInt(25) == 1) addObject(new BasicEnemy(r.nextInt(200), 320, ID.BasicEnemy,this));
+    			//if(r.nextInt(50) == 1) addObject(new ShootingEnemy(r.nextInt(200), 320, ID.ShootingEnemy,this));
+    		}
+    		else if(lvl == 4)
+    		{
+    			if(r.nextInt(40) == 1) addObject(new ShootingEnemy(r.nextInt(200), 320, ID.ShootingEnemy,this));
+    		}
+    		else if(lvl == 5)
+    		{
+    			addObject(new Boss(90, 350, ID.Boss,this));
+    			isBoss = true;
+    		}
+	    }
+    			
+	    	
     	  	
     	if(r.nextInt(1500) == 1)
-    		addObject(new Heal(r.nextInt(200), r.nextInt(150) + 310, ID.Heal,this));
+    		addObject(new Heal(r.nextInt(200), 320, ID.Heal,this));
     	}
     }
 	

@@ -4,7 +4,6 @@ package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.mygdx.game.Galaxy;
 import com.mygdx.gameworld.GameRenderer;
 import com.mygdx.gameworld.GameWorld;
 
@@ -18,16 +17,10 @@ public class GameScreen implements Screen{
 	private float runTime = 0;
 
 	public GameScreen()
-	{
-		
-        float screenWidth = Gdx.graphics.getWidth();
-        float screenHeight = Gdx.graphics.getHeight();
-        float gameWidth = Galaxy.WIDTH;
-        float gameHeight = screenHeight / (screenWidth / gameWidth);
-       
+	{       
 		Gdx.app.log("GameScreen", "Attached");
 		world = new GameWorld();
-		renderer = new GameRenderer(world, (int)gameHeight);
+		renderer = new GameRenderer(world);
 		Gdx.input.setInputProcessor(new InputHandler(world.getPlayer()));
 	}
 	
@@ -67,10 +60,8 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
     }
-    
-
-  
-	public static float clamp(float var, float min, float max){
+	public static float clamp(float var, float min, float max)
+	{
 		if(var >= max)
 			return var = max;
 		else if(var <= min)
