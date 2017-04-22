@@ -1,6 +1,5 @@
 package com.mygdx.gameobjects;
 
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,20 +14,19 @@ public class ShootingEnemyBullet extends GameObject{
 	private TextureRegion texture;
 	private GameWorld world;
 	private int speedY;
-	private Random r;
 	public ShootingEnemyBullet(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		width = 3;
 		height = 8;
 		texture = AssetLoader.shootingEnemyBullet;
 		this.world = world;
-		r = new Random();
 		speedY = 180;			
 	}
 
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		if(y > 320) world.removeObject(this);
 		boundingCircle.set(x + width/2 + 1, y + 3, 2f);			
 	}

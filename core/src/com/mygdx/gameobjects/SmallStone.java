@@ -43,6 +43,7 @@ public class SmallStone extends GameObject{
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		boundingCircle.set(x+8, y+8, 8f);
 		if(y < -20)
 		{	

@@ -35,6 +35,7 @@ public class Boss extends GameObject{
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		shoot();
 		commingDownTime -= delta;
 		boundingCircle.set(x+32, y+32, 32f);

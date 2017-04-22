@@ -17,7 +17,7 @@ public class AssetLoader {
 	public static TextureRegion stone1,stone2,stone3,stone4;
 	public static TextureRegion basicEnemy;
 	public static TextureRegion shootingEnemy, shootingEnemyHit, shootingEnemyBullet;
-	public static TextureRegion heal;
+	public static TextureRegion heal, star;
 	public static TextureRegion boss, bosshit, bossBullet;
 	public static BitmapFont font,font2, shadow;
 	
@@ -55,6 +55,7 @@ public class AssetLoader {
 		bossBullet =  new TextureRegion(new Texture(Gdx.files.internal("bossBullet.png")), 48, 46);
 		
 		heal =  new TextureRegion(new Texture(Gdx.files.internal("heal.png")), 34 , 33);
+		star =  new TextureRegion(new Texture(Gdx.files.internal("star.png")), 31 , 30);
 
         font = new BitmapFont(Gdx.files.internal("text.fnt"));
         font.getData().setScale(0.15f);
@@ -69,5 +70,6 @@ public class AssetLoader {
 	}
 	public static void dispose()
 	{
+		
 	}
 }

@@ -25,7 +25,7 @@ public class BasicStone extends GameObject{
 		height = 32;
 		boundingCircle = new Circle();
 		r = new Random();
-		speed = r.nextInt(20) + 150;
+		speed = r.nextInt(20) + 180;
 		
 		if(r.nextInt(3) == 0)
 			texture = AssetLoader.stone1;
@@ -43,6 +43,7 @@ public class BasicStone extends GameObject{
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		boundingCircle.set(x+16, y+16, 15f);
 		if(y < -20 )
 		{	

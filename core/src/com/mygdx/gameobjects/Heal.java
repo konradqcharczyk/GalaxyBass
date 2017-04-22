@@ -28,6 +28,7 @@ public class Heal extends GameObject{
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		boundingCircle.set(x+6, y+6, 7f);
 		if(y < -20 )
 		{	

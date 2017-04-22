@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.mygdx.gameworld.GameRenderer;
 import com.mygdx.gameworld.GameWorld;
+import com.mygdx.gameworld.GameWorld.GameState;
 import com.mygdx.screens.GameScreen;
 
 import my.gdx.helpers.AssetLoader;
@@ -12,11 +13,12 @@ import my.gdx.helpers.AssetLoader;
 public class Player extends GameObject{
 
 	private GameWorld world;
-	private int reloadTime = 20;
+	private int reloadTime = 30;
 	private int reload = reloadTime;
+	private boolean reloaded = true;
+	public boolean autoShoot = true;
 	private int speed = 200;
 	private int HEALTH = 100;
-	private boolean shoots = true;
 	public boolean moveRight = false;
 	public boolean moveLeft = false;
 	public boolean moveUp = false;
@@ -38,7 +40,11 @@ public class Player extends GameObject{
 	public void update(float delta)
 	{
 		move();
-		shoot();
+		reload(delta);
+		if(autoShoot)
+		{
+			shoot();
+		}
 		collision();
 		if(x <= 0) x = 0;
 		if(x >= 198) x = 198;
@@ -52,13 +58,14 @@ public class Player extends GameObject{
 			world.removeObject(this);
 			world.setAlive(false);
 			world.setKilled(true);
+			world.setCurrentState(GameState.GAMEOVER);
 			world.kill();
 		}
 	}
 
     public void move()
     {	
-    	
+   	
 		if(moveRight)
 			x += speed * Gdx.graphics.getDeltaTime();
 		
@@ -71,25 +78,30 @@ public class Player extends GameObject{
 		if(moveDown)
 			y -= speed * Gdx.graphics.getDeltaTime();
     }
-    public void keyDown(int keyCode)
+    
+    public void reload(float delta)
     {
-    	
+    	if(reload <= 0 && world.isAlive())
+    	{
+    		reloaded = true;
+    		reload = reloadTime;
+    	}
+    	else reload -= delta;
     }
+    
     public void shoot()
     {
-    	if(reload <= 0 && shoots && world.isAlive())
+    	if(reloaded)
     	{
     		world.addObject(new PlayerBullet(x + width/2 - 1, y + 22, ID.PlayerBullet, world));
     		GameRenderer.playLaser();
-    		reload = reloadTime;
+    		reloaded = false;
     	}
-    	else reload--;
     }
     public Circle getBoundingCircle() {
         return boundingCircle;
     }
 
-	@Override
 	public void collision() {
         for(int i = 0; i < world.getSize(); i++)
         {	

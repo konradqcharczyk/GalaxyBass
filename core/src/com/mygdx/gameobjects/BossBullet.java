@@ -36,6 +36,7 @@ public class BossBullet extends GameObject{
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		if(y > 320) world.removeObject(this);
 		boundingCircle.set(x+3,y+3,3f);
 			

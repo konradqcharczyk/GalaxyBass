@@ -19,6 +19,8 @@ public class InputHandler implements InputProcessor{
 		else if(keycode == Keys.W || keycode == Keys.UP) player.moveUp(true);
 		else if(keycode == Keys.S || keycode == Keys.DOWN) player.moveDown(true);
 		else if(keycode == Keys.ESCAPE) System.exit(0);
+		else if(keycode == Keys.SPACE) player.shoot();
+		
 		if(keycode == Keys.H)
 		{
 			if(GameRenderer.drawHB) {GameRenderer.drawHB = false; System.out.println("GameRenderer: HitBox off");}
@@ -35,10 +37,22 @@ public class InputHandler implements InputProcessor{
 			else 
 				{
 				GameRenderer.mute = true;
-				GameRenderer.stopMusic();
+				GameRenderer.stopMusic();      
 				System.out.println("GameRenderer: Sound off");
 				}
 			
+		}
+		
+		if(keycode == Keys.T)
+		{
+			if(player.autoShoot) {
+				player.autoShoot = false;
+				System.out.println("Player: AutoShot off");
+			}
+			else{
+				player.autoShoot = true;
+				System.out.println("Player: AutoShoot on");
+			}
 		}
 		return false;
 	}
@@ -59,31 +73,26 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

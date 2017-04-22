@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
-import com.mygdx.gameworld.GameRenderer;
 import com.mygdx.gameworld.GameWorld;
 
 import my.gdx.helpers.AssetLoader;
@@ -39,6 +38,7 @@ public class ShootingEnemy extends GameObject{
 	public void update(float delta)
 	{
 		move(delta);
+		collision();
 		shoot();
 		boundingCircle.set(x + width/2, y + height/2, width/2f);
 		if(y < -20)
@@ -95,7 +95,6 @@ public class ShootingEnemy extends GameObject{
     	if(reload <= 0)
     	{
     		world.addObject(new ShootingEnemyBullet(x + width/2 - 1, y , ID.ShootingEnemyBullet, world));
-    		GameRenderer.playLaser();
     		reload = reloadTime;
     	}
     	else reload--;

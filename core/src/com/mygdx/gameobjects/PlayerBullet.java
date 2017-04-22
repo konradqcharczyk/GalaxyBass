@@ -24,6 +24,7 @@ public class PlayerBullet extends GameObject{
 	@Override
 	public void update(float delta) {
 		move(delta);
+		collision();
 		if(y > 320) world.removeObject(this);
 		boundingCircle.set(x+1,y+12,2f);
 			
