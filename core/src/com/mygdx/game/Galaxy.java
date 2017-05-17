@@ -8,7 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.screens.GameScreen;
 
 import my.gdx.helpers.AssetLoader;
-
+/**
+ * Main class that keeps screens.
+ * @author Kokos
+ *
+ */
 public class Galaxy extends Game {
 	SpriteBatch batch;
 	Texture img;
@@ -17,6 +21,9 @@ public class Galaxy extends Game {
 	public static int HEIGHT = 650;
 	
 	@Override
+	/**
+	 * Load assets and sets screen
+	 */
 	public void create () {
 		Gdx.app.log("Galaxy", "Created");
 		AssetLoader.load();
@@ -25,6 +32,10 @@ public class Galaxy extends Game {
 	}
 	
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#dispose()
+	 */
 	public void dispose () {
 		super.dispose();
 		AssetLoader.dispose();

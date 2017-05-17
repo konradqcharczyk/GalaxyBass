@@ -7,8 +7,6 @@ import com.mygdx.gameworld.GameWorld;
 import com.mygdx.gameworld.GameWorld.GameState;
 import com.mygdx.screens.GameScreen;
 
-import my.gdx.helpers.AssetLoader;
-
 
 public class Player extends GameObject{
 
@@ -16,8 +14,7 @@ public class Player extends GameObject{
 	private int reloadTime = 30;
 	private int reload = reloadTime;
 	private boolean reloaded = true;
-	public boolean autoShoot = true;
-	private int speed = 200;
+	private int speed = 230;
 	private int HEALTH = 100;
 	public boolean moveRight = false;
 	public boolean moveLeft = false;
@@ -30,18 +27,17 @@ public class Player extends GameObject{
 		super(x, y, id);
 		width = 40;
 	    height = 27;
-	    texture = AssetLoader.playerAdidas;
 	    this.world = world;
 	    boundingCircle = new Circle();
-	    
-		
+	    HEALTH = 100;
 	}
 
 	public void update(float delta)
 	{
+		isHit = false;
 		move();
 		reload(delta);
-		if(autoShoot)
+		if(world.getCurrentState() == GameState.RUNNING)
 		{
 			shoot();
 		}
@@ -50,14 +46,14 @@ public class Player extends GameObject{
 		if(x >= 198) x = 198;
 		if(y <= 0) y = 0;
 		if(y >= 294) y = 294;
-		boundingCircle.set(x+20, y+12, 18f);
-		texture = AssetLoader.playerAdidas;
+		boundingCircle.set(x + width/2, y + height/2 - 2, 18f);
+
 		HEALTH = (int) GameScreen.clamp(HEALTH, 0, 100);
 		if(HEALTH <= 0)
 		{
+			world.setHighScore();
 			world.removeObject(this);
 			world.setAlive(false);
-			world.setKilled(true);
 			world.setCurrentState(GameState.GAMEOVER);
 			world.kill();
 		}
@@ -65,7 +61,6 @@ public class Player extends GameObject{
 
     public void move()
     {	
-   	
 		if(moveRight)
 			x += speed * Gdx.graphics.getDeltaTime();
 		
@@ -101,7 +96,7 @@ public class Player extends GameObject{
     public Circle getBoundingCircle() {
         return boundingCircle;
     }
-
+    
 	public void collision() {
         for(int i = 0; i < world.getSize(); i++)
         {	
@@ -121,8 +116,15 @@ public class Player extends GameObject{
 	
 	public void addHealth(int howMuch)
 	{	
-		if(howMuch < 0)	texture = AssetLoader.playerAdidasHit;
+		if(howMuch < 0){
+			isHit = true;
+		}
 		HEALTH = (int) GameScreen.clamp(HEALTH + howMuch, 0 , 100);	
+	}
+
+	public void setHealth(int howMuch)
+	{
+		HEALTH = (int) GameScreen.clamp(howMuch, 0 , 100);	
 	}
 	
 	public void moveLeft(boolean value)
@@ -141,4 +143,5 @@ public class Player extends GameObject{
 	{
 		this.moveUp = value;
 	}
+
 }

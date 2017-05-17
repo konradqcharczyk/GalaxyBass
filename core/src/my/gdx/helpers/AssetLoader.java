@@ -1,13 +1,18 @@
 package my.gdx.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-
+/**
+ * Load assets - textures, sound, music, fonts, preferences
+ * @author Kokos
+ *
+ */
 public class AssetLoader {
 
 	public static TextureRegion bg;
@@ -21,11 +26,14 @@ public class AssetLoader {
 	public static TextureRegion boss, bosshit, bossBullet;
 	public static BitmapFont font,font2, shadow;
 	
+	public static Preferences prefs;
+	
 	public static Sound laser;
 	public static Music music;
 
-
-	
+	/**
+	 * loads all assets
+	 */
 	public static void load()
 	{
 		bg =  new TextureRegion(new Texture(Gdx.files.internal("bgb.png")), 256 , 256);
@@ -63,13 +71,40 @@ public class AssetLoader {
         shadow.getData().setScale(0.15f);
         
         laser = Gdx.audio.newSound(Gdx.files.internal("las1.wav"));
-        music = Gdx.audio.newMusic(Gdx.files.internal("musicloop.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("background.mp3"));
 
-        
+        prefs = Gdx.app.getPreferences("GalaxyBass");
+        if(!prefs.contains("highScore")){
+        	prefs.putInteger("highScore", 0);
+        }
 		
 	}
+	/**
+	 * sets new high score
+	 * @param value new high score
+	 */
+	public static void setHighScore(int value)
+	{
+		prefs.putInteger("highScore", value);
+		prefs.flush();
+	}
+	/**
+	 * get high score
+	 * @return return high score
+	 */
+	public static int getHighScore()
+	{
+		return prefs.getInteger("highScore");
+	}
+	/**
+	 * dispose assets
+	 */
 	public static void dispose()
 	{
+		font.dispose();
+		shadow.dispose();
 		
+		laser.dispose();
+		music.dispose();
 	}
 }

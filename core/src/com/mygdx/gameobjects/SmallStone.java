@@ -3,12 +3,10 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
 public class SmallStone extends GameObject{
 
@@ -17,6 +15,8 @@ public class SmallStone extends GameObject{
 	private Circle boundingCircle;
 	private Random r;
 	private int speedY, speedX;
+	
+	private int typeOfStone;
 	
 	public SmallStone(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
@@ -29,16 +29,18 @@ public class SmallStone extends GameObject{
 		speedX = r.nextInt(30) - 15;
 		
 		if(r.nextInt(3) == 0)
-			texture = AssetLoader.stone1;
+			typeOfStone = 1;
 		else if(r.nextInt(3) == 1)
-			texture = AssetLoader.stone2;
+			typeOfStone = 2;
 		else if(r.nextInt(3) == 2)
-			texture = AssetLoader.stone3;
+			typeOfStone = 3;
 		else if(r.nextInt(3) == 3)
-			texture = AssetLoader.stone4;
-		else 
-			texture = AssetLoader.stone1;
+			typeOfStone = 4;
+		else
+			typeOfStone = 1;
 	}
+
+
 
 	@Override
 	public void update(float delta) {
@@ -47,13 +49,11 @@ public class SmallStone extends GameObject{
 		boundingCircle.set(x+8, y+8, 8f);
 		if(y < -20)
 		{	
-//			world.addObject(new SmallStone(r.nextInt(220),r.nextInt(20) + 325 ,ID.BasicStone, world));
 			world.removeObject(this);	
 		}
 		
 		if(x < -20 || x > 240)
 		{	
-//			world.addObject(new SmallStone(r.nextInt(220),r.nextInt(20) + 325 ,ID.BasicStone, world));
 			world.removeObject(this);	
 		}
 		
@@ -64,10 +64,6 @@ public class SmallStone extends GameObject{
 		y -= speedY * Gdx.graphics.getDeltaTime();	
 		x += speedX * Gdx.graphics.getDeltaTime();	
 	}
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
     
     public Circle getBoundingCircle() {
         return boundingCircle;
@@ -96,6 +92,12 @@ public class SmallStone extends GameObject{
         	}
         }
 	}
+	public int getTypeOfStone() {
+		return typeOfStone;
+	}
 
+	public void setTypeOfStone(int typeOfStone) {
+		this.typeOfStone = typeOfStone;
+	}
 
 }

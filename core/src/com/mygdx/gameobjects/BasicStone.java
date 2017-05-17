@@ -3,12 +3,10 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
 public class BasicStone extends GameObject{
 
@@ -18,6 +16,10 @@ public class BasicStone extends GameObject{
 	private Random r;
 	private int speed;
 	
+	private int typeOfStone;
+	
+
+
 	public BasicStone(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
@@ -28,15 +30,15 @@ public class BasicStone extends GameObject{
 		speed = r.nextInt(20) + 180;
 		
 		if(r.nextInt(3) == 0)
-			texture = AssetLoader.stone1;
+			typeOfStone = 1;
 		else if(r.nextInt(3) == 1)
-			texture = AssetLoader.stone2;
+			typeOfStone = 2;
 		else if(r.nextInt(3) == 2)
-			texture = AssetLoader.stone3;
+			typeOfStone = 3;
 		else if(r.nextInt(3) == 3)
-			texture = AssetLoader.stone4;
+			typeOfStone = 4;
 		else
-			texture = AssetLoader.stone1;
+			typeOfStone = 1;
 		
 	}
 
@@ -47,7 +49,6 @@ public class BasicStone extends GameObject{
 		boundingCircle.set(x+16, y+16, 15f);
 		if(y < -20 )
 		{	
-//			world.addObject(new BasicStone(r.nextInt(220),r.nextInt(20) + 325 ,ID.BasicStone, world));
 			world.removeObject(this);	
 		}
 	}
@@ -56,10 +57,6 @@ public class BasicStone extends GameObject{
 	{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
     
     public Circle getBoundingCircle() {
         return boundingCircle;
@@ -91,5 +88,11 @@ public class BasicStone extends GameObject{
         }
 	}
 
+	public int getTypeOfStone() {
+		return typeOfStone;
+	}
 
+	public void setTypeOfStone(int typeOfStone) {
+		this.typeOfStone = typeOfStone;
+	}
 }

@@ -3,12 +3,10 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
 public class BasicEnemy extends GameObject{
 
@@ -21,7 +19,6 @@ public class BasicEnemy extends GameObject{
 	public BasicEnemy(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
-		texture = AssetLoader.basicEnemy;
 		width = 16;
 		height = 16;
 		boundingCircle = new Circle();
@@ -33,7 +30,7 @@ public class BasicEnemy extends GameObject{
 	public void update(float delta) {
 		move(delta);
 		collision();
-		if(r.nextInt(4) == 0) speed++;
+		if(r.nextInt(2) == 0) speed++;
 		boundingCircle.set(x + 8, y + 8, 8f);
 		if(y < -20)
 		{	
@@ -45,10 +42,6 @@ public class BasicEnemy extends GameObject{
 	{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
     
     public Circle getBoundingCircle() {
         return boundingCircle;

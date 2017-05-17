@@ -2,12 +2,10 @@ package com.mygdx.gameobjects;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
 public class Star extends GameObject{
 
@@ -19,7 +17,6 @@ public class Star extends GameObject{
 	public Star(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
-		texture = AssetLoader.star;
 		width = 12;
 		height = 12;
 		boundingCircle = new Circle();
@@ -40,11 +37,7 @@ public class Star extends GameObject{
 	{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
-    
+	
     public Circle getBoundingCircle() {
         return boundingCircle;
     }

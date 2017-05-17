@@ -9,6 +9,11 @@ import com.mygdx.gameworld.GameWorld;
 
 import my.gdx.helpers.InputHandler;
 
+/**
+ * Screen with game, it updates GameWorld and GameRender
+ * @author Kokos
+ *
+ */
 public class GameScreen implements Screen{
 	
 	private GameWorld world;
@@ -16,20 +21,23 @@ public class GameScreen implements Screen{
 
 	private float runTime = 0;
 
+	/**
+	 * Class constructor 
+	 */
 	public GameScreen()
 	{       
 		Gdx.app.log("GameScreen", "Attached");
 		world = new GameWorld();
 		renderer = new GameRenderer(world);
-		Gdx.input.setInputProcessor(new InputHandler(world.getPlayer()));
+		Gdx.input.setInputProcessor(new InputHandler(world));
 	}
 	
 	@Override
+
 	public void render(float delta) {
 		runTime += delta;
 		world.update(delta);
 		renderer.render(runTime);
-		if(world.isAlive())world.spawn();
 	}
 
     @Override
@@ -60,6 +68,13 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
     }
+    /**
+     * Sets value with borders
+     * @param var value to be set
+     * @param min minimum border
+     * @param max maximzm border
+     * @return value(if between border) or min or max border
+     */
 	public static float clamp(float var, float min, float max)
 	{
 		if(var >= max)

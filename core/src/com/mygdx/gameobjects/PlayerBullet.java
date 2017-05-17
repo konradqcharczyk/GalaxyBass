@@ -11,7 +11,7 @@ public class PlayerBullet extends GameObject{
 
 	private TextureRegion texture;
 	private GameWorld world;
-	private int speed = 250;
+	private int speed = 300;
 	public PlayerBullet(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		width = 3;

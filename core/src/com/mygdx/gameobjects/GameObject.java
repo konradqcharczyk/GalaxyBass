@@ -1,9 +1,8 @@
 package com.mygdx.gameobjects;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 
-import my.gdx.helpers.AssetLoader;
+
 
 public abstract class GameObject {
 
@@ -12,13 +11,12 @@ public abstract class GameObject {
 	protected int width;
 	protected int height;
 	protected ID id;
-	protected TextureRegion texture;
-	
+
 	protected Circle boundingCircle;
 	
-	
+	protected boolean isHit = false;
+
 	public GameObject(float x, float y, ID id){
-		texture = AssetLoader.bulletTexture;
 		this.x = x;
 		this.y = y;
 		this.id = id;
@@ -54,12 +52,16 @@ public abstract class GameObject {
 	{
 		return height;
 	}
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
     public Circle getBoundingCircle() {
         return boundingCircle;
     }
+    
+	public boolean isHit() {
+		return isHit;
+	}
+
+	public void setHit(boolean isHit) {
+		this.isHit = isHit;
+	}
 
 }

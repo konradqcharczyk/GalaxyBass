@@ -3,12 +3,10 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
 public class ShootingEnemy extends GameObject{
 
@@ -25,7 +23,6 @@ public class ShootingEnemy extends GameObject{
 	public ShootingEnemy(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
-		texture = AssetLoader.shootingEnemy;
 		width = 24;
 		height = 24;
 		boundingCircle = new Circle();
@@ -37,6 +34,8 @@ public class ShootingEnemy extends GameObject{
 
 	public void update(float delta)
 	{
+		if(isHit)
+			isHit = false;
 		move(delta);
 		collision();
 		shoot();
@@ -45,8 +44,7 @@ public class ShootingEnemy extends GameObject{
 		{	
 			world.removeObject(this);	
 		}
-		if(texture == AssetLoader.shootingEnemyHit)
-			texture = AssetLoader.shootingEnemy;
+
 		if(hp <= 0)
 			world.removeObject(this);
 		
@@ -59,10 +57,6 @@ public class ShootingEnemy extends GameObject{
 		if(x <= 0) speedX = speedX * -1;
 		if(x >= 215) speedX = speedX * -1;
 	}
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
     
     public Circle getBoundingCircle() {
         return boundingCircle;
@@ -85,7 +79,7 @@ public class ShootingEnemy extends GameObject{
         	if(tempObject.id == ID.PlayerBullet && Intersector.overlaps(tempObject.getBoundingCircle(), getBoundingCircle()))
         	{
         		hp -= 10;
-        		texture = AssetLoader.shootingEnemyHit;
+        		isHit = true;
         		world.removeObject(tempObject);
         	}
         }
