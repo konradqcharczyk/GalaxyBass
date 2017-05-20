@@ -7,7 +7,11 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-
+/**
+ * The most basic enemy, just going down and speed up
+ * @author Kokos
+ *
+ */
 public class BasicEnemy extends GameObject{
 
 	private GameWorld world;
@@ -15,7 +19,13 @@ public class BasicEnemy extends GameObject{
 	private Circle boundingCircle;
 	private Random r;
 	private int speed;
-	
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 * @param world reference to world with objects
+	 */
 	public BasicEnemy(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
@@ -38,11 +48,18 @@ public class BasicEnemy extends GameObject{
 		}
 	}
 	
+	/**
+	 * moves object down
+	 * @param delta time between frames
+	 */
 	private void move(float delta)
 	{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
-    
+	
+	/**
+	 * get bound circle to hitbox 
+	 */
     public Circle getBoundingCircle() {
         return boundingCircle;
     }

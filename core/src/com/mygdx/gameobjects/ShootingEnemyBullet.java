@@ -2,23 +2,31 @@ package com.mygdx.gameobjects;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
 
+/**
+ * bullet of ShootingEnemy. Goes only down
+ * @author Kokos
+ *
+ */
 public class ShootingEnemyBullet extends GameObject{
 
-	private TextureRegion texture;
 	private GameWorld world;
 	private int speedY;
+	
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 */
 	public ShootingEnemyBullet(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		width = 3;
 		height = 8;
-		texture = AssetLoader.shootingEnemyBullet;
 		this.world = world;
 		speedY = 180;			
 	}
@@ -31,13 +39,13 @@ public class ShootingEnemyBullet extends GameObject{
 		boundingCircle.set(x + width/2 + 1, y + 3, 2f);			
 	}
 	
+	/**
+	 * moves object only down
+	 * @param delta
+	 */
     private void move(float delta)
     {	
 			y -= speedY * Gdx.graphics.getDeltaTime();
-    }
-    public TextureRegion getTexture()
-    {
-    	return texture;
     }
 
 	@Override

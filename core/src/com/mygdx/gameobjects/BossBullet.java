@@ -3,24 +3,31 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
-
+/**
+ * Bullet of 1st boss in game
+ * @author Kokos
+ *
+ */
 public class BossBullet extends GameObject{
 
-	private TextureRegion texture;
 	private GameWorld world;
 	private int speedY, speedX;
 	private Random r;
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 * @param world reference to world with objects
+	 */
 	public BossBullet(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		width = 6;
 		height = 6;
-		texture = AssetLoader.bossBullet;
 		this.world = world;
 		r = new Random();
 		speedY = r.nextInt(300) - 200;
@@ -41,16 +48,16 @@ public class BossBullet extends GameObject{
 		boundingCircle.set(x+3,y+3,3f);
 			
 	}
-	
+	/**
+	 * moves object
+	 * @param delta time between frames
+	 */
     private void move(float delta)
     {	
 			y += speedY * Gdx.graphics.getDeltaTime();
 			x += speedX * Gdx.graphics.getDeltaTime();
     }
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
+
 
 	@Override
 	public void collision() {

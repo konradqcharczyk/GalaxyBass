@@ -6,7 +6,11 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-
+/**
+ * upgrade, adds some HP to player if he hits it
+ * @author Kokos
+ *
+ */
 public class Heal extends GameObject{
 
 	private GameWorld world;
@@ -14,6 +18,12 @@ public class Heal extends GameObject{
 	private Circle boundingCircle;
 	private int speed = 40;
 	
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 */
 	public Heal(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
@@ -32,12 +42,18 @@ public class Heal extends GameObject{
 			world.removeObject(this);	
 		}
 	}
-	
+	/**
+	 * moves object, always go down
+	 * @param delta time between frames
+	 */
 	private void move(float delta)
 	{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
     
+	/**
+	 * get bound circle to hitbox 
+	 */
     public Circle getBoundingCircle() {
         return boundingCircle;
     }

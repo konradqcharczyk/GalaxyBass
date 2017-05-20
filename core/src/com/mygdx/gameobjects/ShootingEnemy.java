@@ -7,7 +7,11 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-
+/**
+ * Enemy that shoots bullets, goes from side to side
+ * @author Kokos
+ *
+ */
 public class ShootingEnemy extends GameObject{
 
 	private GameWorld world;
@@ -20,6 +24,12 @@ public class ShootingEnemy extends GameObject{
 	private int speedX = 60;
 	private int hp = 20;
 	
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 */
 	public ShootingEnemy(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
@@ -31,7 +41,8 @@ public class ShootingEnemy extends GameObject{
 		speedY += r.nextInt(20);
 		if(r.nextInt(2) == 0) speedX *= -1;
 		}
-
+	
+	@Override
 	public void update(float delta)
 	{
 		if(isHit)
@@ -46,10 +57,17 @@ public class ShootingEnemy extends GameObject{
 		}
 
 		if(hp <= 0)
-			world.removeObject(this);
+		{
+    		world.addToScore(40);
+    		world.removeObject(this);
+		}
+			
 		
 	}
-	
+	/**
+	 * moves object from side to side
+	 * @param delta time between frames
+	 */
 	private void move(float delta)
 	{
 		y -= speedY * Gdx.graphics.getDeltaTime();	
@@ -57,11 +75,14 @@ public class ShootingEnemy extends GameObject{
 		if(x <= 0) speedX = speedX * -1;
 		if(x >= 215) speedX = speedX * -1;
 	}
-    
+	/**
+	 * get bound circle to hitbox 
+	 */
     public Circle getBoundingCircle() {
         return boundingCircle;
     }
-
+    
+    @Override
 	public void collision() 
 	{
         for(int i = 0; i < world.getSize(); i++)
@@ -84,6 +105,9 @@ public class ShootingEnemy extends GameObject{
         	}
         }
 	}
+    /**
+     * shoots, creates new bullet object after some amount of time
+     */
     public void shoot()
     {
     	if(reload <= 0)

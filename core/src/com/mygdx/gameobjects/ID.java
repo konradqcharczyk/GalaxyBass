@@ -1,5 +1,10 @@
 package com.mygdx.gameobjects;
 
+/**
+ * ID of GameObjetcs 
+ * @author Kokos
+ *
+ */
 public enum ID {
 
 	Player(),

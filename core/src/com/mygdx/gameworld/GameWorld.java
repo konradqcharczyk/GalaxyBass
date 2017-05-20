@@ -15,7 +15,7 @@ import com.mygdx.gameobjects.Star;
 
 import my.gdx.helpers.AssetLoader;
 /**
- * keeps all objects in vector, management of game, logic
+ * keeps all objects in linked list, management of game, logic
  * @author Kokos
  *
  */
@@ -107,24 +107,24 @@ public class GameWorld {
 	    	lvlReload = lvlTime;
     		if(lvl == 1)
     		{
-    			for(int i = 0; i < 12; i++)
+    			for(int i = 0; i < 10; i++)
     				addObject(new BasicStone(r.nextInt(200), r.nextInt(350) + 320, ID.BasicStone,this));		
     		}
     		else if(lvl == 2)
     		{
-    			for(int i = 0; i < 7; i++)
+    			for(int i = 0; i < 5; i++)
     				addObject(new BasicStone(r.nextInt(200), r.nextInt(350) + 320, ID.BasicStone,this));
-    			for(int i = 0; i < 7; i++)
+    			for(int i = 0; i < 5; i++)
     				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(350) + 320, ID.BasicEnemy,this));
     		}
     		else if(lvl == 3)
     		{
-    			for(int i = 0; i < 15; i++)
+    			for(int i = 0; i < 13; i++)
     				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(400) + 400, ID.BasicEnemy,this));
     		}
     		else if(lvl == 4)
     		{
-    			for(int i = 0; i < 6; i++)
+    			for(int i = 0; i < 5; i++)
     				addObject(new ShootingEnemy(r.nextInt(200), r.nextInt(350) + 320, ID.ShootingEnemy,this));
     		}
     		else if(lvl == 5)
@@ -258,7 +258,7 @@ public class GameWorld {
 			return null;
 	}
 	/**
-	 * get object from objects vector on index
+	 * get object from objects linked list on index
 	 * @param i index
 	 * @return object on this index in 
 	 */
@@ -267,7 +267,7 @@ public class GameWorld {
 		return objects.get(i);
 	}
 	/**
-	 * adds object at the end of objects vector
+	 * adds object at the end of objects linked list
 	 * @param temp object that will be added
 	 */
 	public void addObject(GameObject temp)
@@ -275,7 +275,7 @@ public class GameWorld {
 		objects.add(temp);
 	}
 	/**
-	 * remove object from objects vector
+	 * remove object from objects linked list
 	 * @param temp object to delete
 	 */
 	public void removeObject(GameObject temp)
@@ -283,7 +283,7 @@ public class GameWorld {
 		objects.remove(temp);
 	}
 	/**
-	 * size of objects vector
+	 * size of objects linked list
 	 * @return size
 	 */
 	public int getSize()

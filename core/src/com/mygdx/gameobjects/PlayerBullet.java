@@ -1,22 +1,28 @@
 package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.gameworld.GameWorld;
 
-import my.gdx.helpers.AssetLoader;
 
-
+/**
+ * Bullet of player. It goes only up
+ * @author Kokos
+ *
+ */
 public class PlayerBullet extends GameObject{
 
-	private TextureRegion texture;
 	private GameWorld world;
 	private int speed = 300;
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 */
 	public PlayerBullet(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		width = 3;
 		height = 15;
-		texture = AssetLoader.bulletTexture;
 		this.world = world;
 		
 	}
@@ -29,20 +35,18 @@ public class PlayerBullet extends GameObject{
 		boundingCircle.set(x+1,y+12,2f);
 			
 	}
-	
+	/**
+	 * moves object, only up
+	 * @param delta
+	 */
     private void move(float delta)
     {	
 			y += speed * Gdx.graphics.getDeltaTime();
     }
-    public TextureRegion getTexture()
-    {
-    	return texture;
-    }
 
 	@Override
 	public void collision() {
-		
-		
+		return;
 	}
 
 }

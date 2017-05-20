@@ -6,12 +6,15 @@ import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 import com.mygdx.gameworld.GameWorld.GameState;
 
-
+/**
+ * Boss of 1st level, shoots randomly in all directions
+ * @author Kokos
+ *
+ */
 public class Boss extends GameObject{
 
 	private GameWorld world;
 
-	private Circle boundingCircle;
 	private int reload = 0;
 	private int reloadTime = 30;
 	private int bulletAmmount = 7;
@@ -21,6 +24,14 @@ public class Boss extends GameObject{
 	private float commingDownTime = 4;
 	private boolean isKilled = false;
 	
+	
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 * @param world reference to world with objects
+	 */
 	public Boss(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
@@ -48,6 +59,10 @@ public class Boss extends GameObject{
 		
 	}
 	
+	/**
+	 * Moves the object, at start only down but then side to side
+	 * @param delta time between frames
+	 */
 	private void move(float delta)
 	{
 		if(commingDownTime >= 0 )
@@ -66,9 +81,6 @@ public class Boss extends GameObject{
 		
 	}
     
-    public Circle getBoundingCircle() {
-        return boundingCircle;
-    }
 
 	@Override
 	public void collision() 
@@ -101,15 +113,30 @@ public class Boss extends GameObject{
         }
 	}
 	
+	/**
+	 * get bound circle to hitbox 
+	 */
+    public Circle getBoundingCircle() {
+        return boundingCircle;
+    }
+	/**
+	 * return hp of boss
+	 */
 	public int getHealth()
 	{
 		return HP;
 	}
+	/**
+	 * sets if boss is killed
+	 * @return true if yes false if no
+	 */
 	public boolean isKilled()
 	{
 		return isKilled;
 	}
-	
+	/**
+	 * shoots in all directions
+	 */
 	private void shoot()
 	{
 		if(!isKilled && commingDownTime < 0)

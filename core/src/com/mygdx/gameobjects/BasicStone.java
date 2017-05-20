@@ -7,7 +7,11 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
-
+/**
+ * Big stone with 1 of 4 textures, falling down, when it's hit creates 2 small stones
+ * @author Kokos
+ *
+ */
 public class BasicStone extends GameObject{
 
 	private GameWorld world;
@@ -19,7 +23,13 @@ public class BasicStone extends GameObject{
 	private int typeOfStone;
 	
 
-
+	/**
+	 * Class constructor
+	 * @param x horizontal position 
+	 * @param y vertical position
+	 * @param id of object
+	 * @param world reference to world with objects
+	 */
 	public BasicStone(float x, float y, ID id, GameWorld world) {
 		super(x, y, id);
 		this.world = world;
@@ -53,11 +63,18 @@ public class BasicStone extends GameObject{
 		}
 	}
 	
+	/**
+	 * moves object
+	 * @param delta time between frames
+	 */
 	private void move(float delta)
 	{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
     
+	/**
+	 * get bound circle to hitbox 
+	 */
     public Circle getBoundingCircle() {
         return boundingCircle;
     }
@@ -88,11 +105,22 @@ public class BasicStone extends GameObject{
         }
 	}
 
+	/**
+	 * return what type of stone is it
+	 * @return type <1-4>
+	 */
 	public int getTypeOfStone() {
 		return typeOfStone;
 	}
-
+	/**
+	 * sets what type of stone is it
+	 * @param typeOfStone <1-4>, 1 as default
+	 */
 	public void setTypeOfStone(int typeOfStone) {
+		if(typeOfStone < 1 || typeOfStone > 4) {
+			this.typeOfStone = 1;
+			return;
+		}
 		this.typeOfStone = typeOfStone;
 	}
 }
