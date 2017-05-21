@@ -3,7 +3,6 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
@@ -14,9 +13,11 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class BasicEnemy extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 
-	private Circle boundingCircle;
 	private Random r;
 	private int speed;
 	/**
@@ -31,7 +32,6 @@ public class BasicEnemy extends GameObject{
 		this.world = world;
 		width = 16;
 		height = 16;
-		boundingCircle = new Circle();
 		r = new Random();
 		speed = r.nextInt(20) + 180;
 	}
@@ -57,12 +57,6 @@ public class BasicEnemy extends GameObject{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
 	
-	/**
-	 * get bound circle to hitbox 
-	 */
-    public Circle getBoundingCircle() {
-        return boundingCircle;
-    }
 
 	@Override
 	public void collision() 

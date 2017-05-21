@@ -3,7 +3,6 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
@@ -14,10 +13,14 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class ShootingEnemy extends GameObject{
 
+    
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 
-	private Circle boundingCircle;
 	private Random r;
+	
 	private int reloadTime = 40;
 	private int reload = reloadTime;
 	private int speedY = 80;
@@ -35,7 +38,6 @@ public class ShootingEnemy extends GameObject{
 		this.world = world;
 		width = 24;
 		height = 24;
-		boundingCircle = new Circle();
 		r = new Random();
 		speedX += r.nextInt(10);
 		speedY += r.nextInt(20);
@@ -75,13 +77,7 @@ public class ShootingEnemy extends GameObject{
 		if(x <= 0) speedX = speedX * -1;
 		if(x >= 215) speedX = speedX * -1;
 	}
-	/**
-	 * get bound circle to hitbox 
-	 */
-    public Circle getBoundingCircle() {
-        return boundingCircle;
-    }
-    
+
     @Override
 	public void collision() 
 	{

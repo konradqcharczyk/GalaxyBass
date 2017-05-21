@@ -10,14 +10,33 @@ import com.badlogic.gdx.math.Circle;
  */
 public abstract class GameObject {
 
+    /**
+     * position horizontal
+     */
 	protected float x;
+	/**
+	 * position vertical
+	 */
 	protected float y;
+	/**
+	 * width of object
+	 */
 	protected int width;
+	/**
+	 * height of object
+	 */
 	protected int height;
+	/**
+	 * ID of object
+	 */
 	protected ID id;
-
+	/**
+	 * bounding circle - hit box of object
+	 */
 	protected Circle boundingCircle;
-	
+	/**
+	 * if object was hit in this frame
+	 */
 	protected boolean isHit = false;
 	/**
 	 * Class constructor

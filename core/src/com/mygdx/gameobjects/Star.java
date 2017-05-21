@@ -2,7 +2,6 @@ package com.mygdx.gameobjects;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
@@ -13,9 +12,11 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class Star extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 
-	private Circle boundingCircle;
 	private int speed = 100;
 	
 	/**
@@ -29,7 +30,6 @@ public class Star extends GameObject{
 		this.world = world;
 		width = 12;
 		height = 12;
-		boundingCircle = new Circle();
 	}
 
 	@Override
@@ -51,13 +51,6 @@ public class Star extends GameObject{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
 	
-	/**
-	 * get bound circle to hitbox 
-	 */
-    public Circle getBoundingCircle() {
-        return boundingCircle;
-    }
-
 	@Override
 	public void collision() 
 	{

@@ -78,9 +78,9 @@ public class GameRenderer {
 	private void renderObjects()
 	{
 		TextureRegion texture;
-        for(int i = 0; i < world.objects.size(); i++)
+        for(int i = 0; i < world.getObjectsSize(); i++)
         {	
-        	GameObject tempObject = world.objects.get(i);
+        	GameObject tempObject = world.getObject(i);
         	texture = findTexture(tempObject);
         	batcher.draw(texture, tempObject.getX(), tempObject.getY(), tempObject.getWidth(), tempObject.getHeight());
         }
@@ -172,6 +172,10 @@ public class GameRenderer {
 		{
 			return AssetLoader.star;				
 		}
+		else if(object.getID() == ID.PowerUp)
+        {
+            return AssetLoader.powerUp;                
+        }
 		
 		return null;
 	}
@@ -324,9 +328,9 @@ public class GameRenderer {
 	  shapeRenderer.begin(ShapeType.Line);
 	  
       shapeRenderer.setColor(Color.YELLOW);   
-      for(int i = 0; i < world.objects.size(); i++)
+      for(int i = 0; i < world.getObjectsSize(); i++)
       {	
-      	GameObject tempObject = world.objects.get(i);
+      	GameObject tempObject = world.getObject(i);
       	shapeRenderer.circle(tempObject.getBoundingCircle().x, tempObject.getBoundingCircle().y, tempObject.getBoundingCircle().radius);
       }
       

@@ -14,6 +14,9 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class BossBullet extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 	private int speedY, speedX;
 	private Random r;

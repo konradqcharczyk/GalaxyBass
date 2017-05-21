@@ -1,7 +1,6 @@
 package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.mygdx.gameworld.GameRenderer;
 import com.mygdx.gameworld.GameWorld;
 import com.mygdx.gameworld.GameWorld.GameState;
@@ -14,16 +13,29 @@ import com.mygdx.screens.GameScreen;
  */
 public class Player extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
+	/**
+	 * time between shoots
+	 */
 	private int reloadTime = 30;
 	private int reload = reloadTime;
 	private boolean reloaded = true;
 	private int speed = 230;
 	private int HEALTH = 100;
+	
+	/**
+	 * if player is moving in that direction
+	 */
 	public boolean moveRight = false;
 	public boolean moveLeft = false;
 	public boolean moveUp = false;
 	public boolean moveDown = false;
+	
+	private int powerUpTime;
+    private boolean isPowerUp = false;
 	
 	/**
 	 * Class constructor
@@ -37,7 +49,6 @@ public class Player extends GameObject{
 		width = 40;
 	    height = 27;
 	    this.world = world;
-	    boundingCircle = new Circle();
 	    HEALTH = 100;
 	}
 	
@@ -48,9 +59,7 @@ public class Player extends GameObject{
 		move();
 		reload(delta);
 		if(world.getCurrentState() == GameState.RUNNING)
-		{
 			shoot();
-		}
 		collision();
 		if(x <= 0) x = 0;
 		if(x >= 198) x = 198;
@@ -98,6 +107,16 @@ public class Player extends GameObject{
     		reload = reloadTime;
     	}
     	else reload -= delta;
+    	
+    	if(isPowerUp)
+    	{
+    	    if(powerUpTime <= 0)
+    	    {  
+    	       isPowerUp = false;
+    	       reloadTime = 30;
+    	    }
+    	    else powerUpTime -= delta;
+    	}
     }
     
     /**
@@ -126,6 +145,15 @@ public class Player extends GameObject{
 		
 	}
 	
+    /**
+     * Reduce time of reload
+     */
+    public void powerUp(){
+        reloadTime = 7;
+        powerUpTime = 300;
+        isPowerUp = true;
+    }
+    
     /**
      * return how much health have player
      */
@@ -184,5 +212,20 @@ public class Player extends GameObject{
 	{
 		this.moveUp = value;
 	}
+	/**
+	 * if player is powered up
+	 * @return true if yes false if no
+	 */
+    public boolean isPowerUp() {
+        return isPowerUp;
+    }
+    
+    /**
+     * set if player is powered up
+     * @param isPowerUp true if yes false if no
+     */
+    public void setPowerUp(boolean isPowerUp) {
+        this.isPowerUp = isPowerUp;
+    }
 
 }

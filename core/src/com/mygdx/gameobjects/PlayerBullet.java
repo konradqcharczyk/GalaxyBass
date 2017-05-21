@@ -11,6 +11,9 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class PlayerBullet extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 	private int speed = 300;
 	/**

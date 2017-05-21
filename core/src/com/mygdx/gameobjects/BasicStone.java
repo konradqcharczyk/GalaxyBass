@@ -3,7 +3,6 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
@@ -13,13 +12,18 @@ import com.mygdx.gameworld.GameWorld;
  *
  */
 public class BasicStone extends GameObject{
-
+    
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 
-	private Circle boundingCircle;
 	private Random r;
 	private int speed;
 	
+	/**
+	 * type of texture, 1-4
+	 */
 	private int typeOfStone;
 	
 
@@ -35,21 +39,9 @@ public class BasicStone extends GameObject{
 		this.world = world;
 		width = 32;
 		height = 32;
-		boundingCircle = new Circle();
 		r = new Random();
-		speed = r.nextInt(20) + 180;
-		
-		if(r.nextInt(3) == 0)
-			typeOfStone = 1;
-		else if(r.nextInt(3) == 1)
-			typeOfStone = 2;
-		else if(r.nextInt(3) == 2)
-			typeOfStone = 3;
-		else if(r.nextInt(3) == 3)
-			typeOfStone = 4;
-		else
-			typeOfStone = 1;
-		
+		speed = r.nextInt(20) + 180;	
+		typeOfStone = initStoneType();	
 	}
 
 	@Override
@@ -72,12 +64,6 @@ public class BasicStone extends GameObject{
 		y -= speed * Gdx.graphics.getDeltaTime();	
 	}
     
-	/**
-	 * get bound circle to hitbox 
-	 */
-    public Circle getBoundingCircle() {
-        return boundingCircle;
-    }
 
 	@Override
 	public void collision() 
@@ -105,6 +91,22 @@ public class BasicStone extends GameObject{
         }
 	}
 
+	/**
+	 * sets random type
+	 * @return 1 to 4
+	 */
+	private int initStoneType(){
+       if(r.nextInt(3) == 0)
+            return 1;
+        else if(r.nextInt(3) == 1)
+            return 2;
+        else if(r.nextInt(3) == 2)
+            return 3;
+        else if(r.nextInt(3) == 3)
+            return 4;
+        else
+            return 1;
+	}
 	/**
 	 * return what type of stone is it
 	 * @return type <1-4>

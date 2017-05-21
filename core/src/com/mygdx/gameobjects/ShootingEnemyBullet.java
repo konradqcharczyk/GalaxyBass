@@ -14,6 +14,9 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class ShootingEnemyBullet extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 	private int speedY;
 	
@@ -45,7 +48,7 @@ public class ShootingEnemyBullet extends GameObject{
 	 */
     private void move(float delta)
     {	
-			y -= speedY * Gdx.graphics.getDeltaTime();
+		y -= speedY * Gdx.graphics.getDeltaTime();
     }
 
 	@Override

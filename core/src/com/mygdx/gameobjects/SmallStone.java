@@ -3,7 +3,6 @@ package com.mygdx.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 
@@ -14,11 +13,17 @@ import com.mygdx.gameworld.GameWorld;
  */
 public class SmallStone extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
 
 	private Random r;
 	private int speedY, speedX;
 	
+    /**
+    * type of texture, 1-4
+    */
 	private int typeOfStone;
 	
 	/**
@@ -33,41 +38,24 @@ public class SmallStone extends GameObject{
 		this.world = world;
 		width = 16;
 		height = 16;
-		boundingCircle = new Circle();
 		r = new Random();
 		speedY = r.nextInt(20) + 70;
 		speedX = r.nextInt(30) - 15;
-		
-		if(r.nextInt(3) == 0)
-			typeOfStone = 1;
-		else if(r.nextInt(3) == 1)
-			typeOfStone = 2;
-		else if(r.nextInt(3) == 2)
-			typeOfStone = 3;
-		else if(r.nextInt(3) == 3)
-			typeOfStone = 4;
-		else
-			typeOfStone = 1;
+		typeOfStone = initStoneType();
 	}
-
-
 
 	@Override
 	public void update(float delta) {
 		move(delta);
 		collision();
 		boundingCircle.set(x+8, y+8, 8f);
-		if(y < -20)
-		{	
+		if(y < -20)	
 			world.removeObject(this);	
-		}
 		
 		if(x < -20 || x > 240)
-		{	
 			world.removeObject(this);	
-		}
-		
 	}
+	
 	/**
 	 * move the object
 	 * @param delta time between frames
@@ -101,14 +89,24 @@ public class SmallStone extends GameObject{
         	}
         }
 	}
-	
-	/**
-	 * get bound circle to hitbox 
-	 */
-    public Circle getBoundingCircle() {
-        return boundingCircle;
+	 
+    /**
+     * sets random type
+     * @return 1 to 4
+     */
+    private int initStoneType(){
+       if(r.nextInt(3) == 0)
+            return 1;
+        else if(r.nextInt(3) == 1)
+            return 2;
+        else if(r.nextInt(3) == 2)
+            return 3;
+        else if(r.nextInt(3) == 3)
+            return 4;
+        else
+            return 1;
     }
-
+    
 	/**
 	 * return what type of stone is it
 	 * @return type <1-4>

@@ -10,6 +10,7 @@ import com.mygdx.gameobjects.GameObject;
 import com.mygdx.gameobjects.Heal;
 import com.mygdx.gameobjects.ID;
 import com.mygdx.gameobjects.Player;
+import com.mygdx.gameobjects.PowerUp;
 import com.mygdx.gameobjects.ShootingEnemy;
 import com.mygdx.gameobjects.Star;
 
@@ -21,26 +22,80 @@ import my.gdx.helpers.AssetLoader;
  */
 public class GameWorld {
 
-	LinkedList<GameObject> objects;
+    /**
+     * List of all objects in game
+     */
+	private LinkedList<GameObject> objects;
 	
+	/**
+	 * Main player
+	 */
 	private Player player;
+	
+	/**
+	 * Boss of 1st level
+	 */
 	private Boss boss;
+	
+	/**
+	 * If player is alive
+	 */
 	private boolean isAlive = true;
+	
+	/**
+	 * Score counter
+	 */
 	private int score = 0;
+	
+	/**
+	 * Level counter
+	 */
 	private int lvl = 0;
+	
+	/**
+	 * Time passed in this level
+	 */
 	private int lvlReload = 0;
+	
+	/**
+	 * Time of level
+	 */
 	private int lvlTime = 400;
 	
+	/**
+	 * How many frames between incrementing score
+	 */
 	private int scoreSpeed = 50;
+	
+	/**
+	 * Random, needed in spawner
+	 */
 	private Random r;
 	
+	/**
+	 * If boss is alive
+	 */
 	private boolean isBoss = false;
+	
+	/**
+	 * Game only spawn boss. Use only to debug - not working well
+	 */
 	private boolean onlyBoss = false;
 	
+	/**
+	 * States that can game be in
+	 * @author Kokos
+	 *
+	 */
 	public enum GameState{
 		READY, RUNNING, GAMEOVER, WIN
 	}
+	/**
+	 * Current game state
+	 */
 	private GameState currentState;
+	
+	
 	/**
 	 * Class Constructor
 	 */
@@ -77,6 +132,7 @@ public class GameWorld {
 			break;
 		}
 	}
+	
 	/**
 	 * updates objects, score and spawn when it's running game
 	 * @param delta
@@ -98,62 +154,63 @@ public class GameWorld {
 	    	{
 	    		lvlReload = lvlTime;
 	    		lvl++;
-	    	
 	    	}
-    	else if(isAlive) lvlReload--;
-	    	
-	    if(lvlReload <= 0)
-	    {
-	    	lvlReload = lvlTime;
-    		if(lvl == 1)
-    		{
-    			for(int i = 0; i < 10; i++)
-    				addObject(new BasicStone(r.nextInt(200), r.nextInt(350) + 320, ID.BasicStone,this));		
-    		}
-    		else if(lvl == 2)
-    		{
-    			for(int i = 0; i < 5; i++)
-    				addObject(new BasicStone(r.nextInt(200), r.nextInt(350) + 320, ID.BasicStone,this));
-    			for(int i = 0; i < 5; i++)
-    				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(350) + 320, ID.BasicEnemy,this));
-    		}
-    		else if(lvl == 3)
-    		{
-    			for(int i = 0; i < 13; i++)
-    				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(400) + 400, ID.BasicEnemy,this));
-    		}
-    		else if(lvl == 4)
-    		{
-    			for(int i = 0; i < 5; i++)
-    				addObject(new ShootingEnemy(r.nextInt(200), r.nextInt(350) + 320, ID.ShootingEnemy,this));
-    		}
-    		else if(lvl == 5)
-    		{
-    			boss = new Boss(90, 350, ID.Boss,this);
-    			addObject(boss);
-    			isBoss = true;
-    		}
-	    }
-	    else lvlReload--;
+        	else if(isAlive) lvlReload--;
+    	    	
+    	    if(lvlReload <= 0)
+    	    {
+    	    	lvlReload = lvlTime;
+        		if(lvl == 1)
+        		{
+        			for(int i = 0; i < 10; i++)
+        				addObject(new BasicStone(r.nextInt(200), r.nextInt(350) + 320, ID.BasicStone,this));		
+        		}
+        		else if(lvl == 2)
+        		{
+        			for(int i = 0; i < 5; i++)
+        				addObject(new BasicStone(r.nextInt(200), r.nextInt(350) + 320, ID.BasicStone,this));
+        			for(int i = 0; i < 5; i++)
+        				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(350) + 320, ID.BasicEnemy,this));
+        		}
+        		else if(lvl == 3)
+        		{
+        			for(int i = 0; i < 13; i++)
+        				addObject(new BasicEnemy(r.nextInt(200), r.nextInt(400) + 400, ID.BasicEnemy,this));
+        		}
+        		else if(lvl == 4)
+        		{
+        			for(int i = 0; i < 5; i++)
+        				addObject(new ShootingEnemy(r.nextInt(200), r.nextInt(350) + 320, ID.ShootingEnemy,this));
+        		}
+        		else if(lvl == 5)
+        		{
+        			boss = new Boss(90, 350, ID.Boss,this);
+        			addObject(boss);
+        			isBoss = true;
+        		}
+    	    }
+    	    else lvlReload--;
     			
 	    
-	    if(currentState == GameState.RUNNING)
-	    {
-	    	if(r.nextInt(1500) == 1)
-	    	{
-	    		addObject(new Heal(r.nextInt(200), 330, ID.Heal,this));
-	    	}
-	    	if(r.nextInt(500) == 1)
-	    	{
-	    		addObject(new Star(r.nextInt(200), 330, ID.Star,this));
-	    	}
-	    }
-    }
-    	else{
+    	    if(currentState == GameState.RUNNING)
+    	    {
+    	    	if(r.nextInt(1500) == 1)
+    	    		addObject(new Heal(r.nextInt(200), 330, ID.Heal,this));
+    	    	
+    	    	if(r.nextInt(500) == 1)
+    	    		addObject(new Star(r.nextInt(200), 330, ID.Star,this));
+    	    	
+                if(r.nextInt(1500) == 1)
+                    addObject(new PowerUp(r.nextInt(200), 330, ID.PowerUp,this));
+    	    }
+    	}
+    	else
+    	{
     		if(!isBoss)
     		{
-    		addObject(new Boss(90, 350, ID.Boss,this));
-    		isBoss = true;
+    		    boss = new Boss(90, 350, ID.Boss,this);
+        		addObject(boss);
+        		isBoss = true;
     		}
     	}
     }
@@ -226,6 +283,7 @@ public class GameWorld {
         }
     	addObject(player);
     	setBoss(false);
+    	player.setPowerUp(false);
 		isAlive = true;
 		score = 0;
 		lvl = 0;
@@ -404,5 +462,13 @@ public class GameWorld {
 	 */
 	public boolean isWin(){
 		return currentState == GameState.WIN;
+	}
+	
+	/**
+	 * number of objects
+	 * @return size of objects list
+	 */
+	public int getObjectsSize(){
+	    return objects.size();
 	}
 }

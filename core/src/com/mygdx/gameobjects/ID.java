@@ -16,6 +16,7 @@ public enum ID {
 	ShootingEnemyBullet(),
 	Heal(),
 	Star(),
+	PowerUp(),
 	Boss(),
 	BossBullet()
 }

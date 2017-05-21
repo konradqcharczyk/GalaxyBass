@@ -1,7 +1,6 @@
 package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.mygdx.gameworld.GameWorld;
 import com.mygdx.gameworld.GameWorld.GameState;
@@ -13,15 +12,32 @@ import com.mygdx.gameworld.GameWorld.GameState;
  */
 public class Boss extends GameObject{
 
+    /**
+     * world with list of object to check for collisions 
+     */
 	private GameWorld world;
-
+    /**
+     * counter of reload time
+     */
 	private int reload = 0;
+	/**
+	 * how much time to reload
+	 */
 	private int reloadTime = 30;
+	/**
+	 * how many bullets are shoot
+	 */
 	private int bulletAmmount = 7;
+	
 	private int speedY = 40;
 	private int speedX = 80;
 	private int HP = 100;
+	
+	/**
+	 * time when boss is just going down 
+	 */
 	private float commingDownTime = 4;
+	
 	private boolean isKilled = false;
 	
 	
@@ -37,8 +53,6 @@ public class Boss extends GameObject{
 		this.world = world;
 		width = 64;
 		height = 64;
-		boundingCircle = new Circle();
-
 	}
 
 	@Override
@@ -116,9 +130,9 @@ public class Boss extends GameObject{
 	/**
 	 * get bound circle to hitbox 
 	 */
-    public Circle getBoundingCircle() {
-        return boundingCircle;
-    }
+//    public Circle getBoundingCircle() {
+//        return boundingCircle;
+//    }
 	/**
 	 * return hp of boss
 	 */
