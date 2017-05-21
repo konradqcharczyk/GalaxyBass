@@ -26,9 +26,6 @@ public class Player extends GameObject{
 	private int speed = 230;
 	private int HEALTH = 100;
 	
-	/**
-	 * if player is moving in that direction
-	 */
 	public boolean moveRight = false;
 	public boolean moveLeft = false;
 	public boolean moveUp = false;
@@ -156,6 +153,7 @@ public class Player extends GameObject{
     
     /**
      * return how much health have player
+     * @return player health
      */
 	public int getHealth()
 	{

@@ -411,6 +411,7 @@ public class GameWorld {
 	public boolean isBoss(){
 		return isBoss;
 	}
+	
 	/**
 	 * sets boss is alive
 	 * @param true if alive false if dead
